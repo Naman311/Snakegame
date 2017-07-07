@@ -107,7 +107,7 @@ void steps()
 {
     DWORD start_time, check_time;
     int dflag=0;
-    char n;
+    char n,m='/0';
     food();
 
         /*a=random();
@@ -131,6 +131,12 @@ void steps()
         switch (n)
         {
         case 'w':
+            if(m=='s')
+            {
+                break;
+            }
+            else
+            {
             p.x=temp.x-1;
             p.y=temp.y;
             if(dead(p))
@@ -142,7 +148,14 @@ void steps()
                 movement(p);
             }
             break;
+            }
         case 'a':
+            if(m=='d')
+            {
+                break;
+            }
+            else
+            {
             p.x=temp.x;
             p.y=temp.y-1;
             if(dead(p))
@@ -154,7 +167,14 @@ void steps()
                 movement(p);
             }
             break;
+            }
         case 's':
+            if(m=='w')
+            {
+                break;
+            }
+            else
+            {
             p.x=temp.x+1;
             p.y=temp.y;
             if(dead(p))
@@ -166,7 +186,14 @@ void steps()
                 movement(p);
             }
             break;
+            }
         case 'd':
+            if(m=='a')
+            {
+                break;
+            }
+            else
+            {
             p.x=temp.x;
             p.y=temp.y+1;
             if(dead(p))
@@ -178,7 +205,9 @@ void steps()
                 movement(p);
             }
             break;
+            }
         }
+        m=n;
     }
 }
 int main()
