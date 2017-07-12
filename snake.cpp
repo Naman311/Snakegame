@@ -1,8 +1,8 @@
-//#include<bits/stdc++.h>
-#include <iostream>
-#include <deque>
+#include<bits/stdc++.h>
+//#include <iostream>
+//#include <deque>
 #include<conio.h>
-#include<stdlib.h>
+//#include<stdlib.h>
 #include <windows.h>
 
 using namespace std;
@@ -106,7 +106,7 @@ void steps()
 {
     DWORD start_time, check_time;
     int dflag=0;
-    int n='/O';
+    char n;
     food();
 
         /*a=random();
@@ -120,9 +120,9 @@ void steps()
         temp=q.front();cout<<"\n Front (x,y) = "<<temp.x<<" "<<temp.y<<endl;
          while(check_time>GetTickCount())
         {
-            if (_kbhit())
+            if (kbhit())
             {
-				n=_getch();
+				n=getch();
                 break;
             }
         }
@@ -186,6 +186,6 @@ int main()
     p.y=0;
     q.push_front(p);
     steps();
-    _getch();
+    getch();
     return 0;
 }
