@@ -169,7 +169,7 @@ void steps()
         check_time=start_time+700;
         temp=q.front();
         //cout<<"\n Front (x,y) = "<<temp.x<<" "<<temp.y<<endl;
-         while(check_time>GetTickCount())
+        while(check_time>GetTickCount())
         {
             if (kbhit())
             {
@@ -235,6 +235,8 @@ int main()
 {
     p.x=0;                              //initial position
     p.y=0;
+    cout<<"Welcome to snake game..\nRules :-\nUse w,a,s,d to move snake..\n= represent head of snake\n+ represent rest part of snake\n% represent food of snake\nPress any key to continue..";
+    while(!kbhit()){}
     q.push_front(p);
     steps();
     getch();
