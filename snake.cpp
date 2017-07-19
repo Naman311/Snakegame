@@ -1,10 +1,11 @@
 #include<bits/stdc++.h>
-//#include <iostream>
-//#include <deque>
 #include<conio.h>
-//#include<stdlib.h>
 #include <windows.h>
 //#include <stdio.h>
+//#include <iostream>
+//#include <deque>
+//#include<stdlib.h>
+
 using namespace std;
 
 COORD coord={0,0};
@@ -21,13 +22,13 @@ struct point
 
 deque<point> q;
 
-void gotoxy(int x,int y)
+void gotoxy(int x,int y)                                        //gotoxy Function definition.
 {
     coord.X=x;
     coord.Y=y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
 }
-void bonds()
+void show_bounds()                                                    //Output the bounds of game
 {
     for(int i=0;i<X+2;i++)
     {
@@ -40,11 +41,11 @@ void bonds()
         cout<<"|";
     }
 }
-int random()
+int random()                                                        //Generate random values for program
 {
     return(rand()%X+1);
 }
-bool bound(int x,int y)
+bool bound(int x,int y)                                             //Checking out of bounds condition
 {
     if( x<0 || y<0 || x>X || y>Y)
     {
@@ -53,7 +54,7 @@ bool bound(int x,int y)
     else
         return false;
 }
-void GUI()
+void show_snake()                                                          //Show the snake
 {
     deque<point>::iterator it;
     for (it=q.begin();it!=q.end();it++ )
@@ -62,21 +63,21 @@ void GUI()
         gotoxy(temp.x,temp.y);
         if(it==q.begin())
         {
-            cout<<"=";
+            cout<<"=";                                                     //Head of snake
         }
-        else if((it+1)==q.end())
+        else if((it+1)==q.end())                                           //output cursor
         {
             cout<<"+";
             gotoxy(X+2,Y+2);
             cout<<" ";
         }
-        else
+        else                                                               //rest body of snake
         {
             cout<<"+";
         }
     }
 }
-void showstatus()
+/*void showstatus()                                                        //show dequeue status used for snake
 {
     cout<<"\n The Queue status is : \n";
     deque<point>::iterator it;
@@ -85,8 +86,8 @@ void showstatus()
         temp=*it;
         cout<<temp.x<<" "<<temp.y<<endl;
     }
-}
-bool selfkill(int x,int y)
+}*/
+bool selfkill(int x,int y)                                               //check for collisions
 {
     deque<point>::iterator it;
     for (it=q.begin();it!=q.end();it++ )
@@ -100,7 +101,7 @@ bool selfkill(int x,int y)
     return false;
 
 }
-bool dead(point p)
+bool dead(point p)                                                      //Game over check
 {
     if(bound(p.x,p.y))
     {
@@ -117,7 +118,7 @@ bool dead(point p)
     else
         return false;
 }
-void food()
+void food()                                                             //place food in bounds
 {
     a=random();
     b=random();
@@ -126,9 +127,9 @@ void food()
         food();
     }
 }
-void movement(point p)
+void movement(point p)                                          //Snake movement
 {
-    if(p.x==a && p.y==b)
+    if(p.x==a && p.y==b)                                        //if at food
     {
         //cout<<"\n pushing";
         //cout<<"\n P.x = "<<p.x<<" P.y = "<<p.y;
@@ -139,7 +140,7 @@ void movement(point p)
         b=random();
         cout<<"\n Food is at (x,y) = "<<a<<" "<<b;
     */}
-    else
+    else                                                        //if not at food
     {
         q.push_front(p);
         q.pop_back();
@@ -158,18 +159,18 @@ void steps()
         b=random();
         cout<<"\n Food is at (x,y) = "<<a<<" "<<b;
     */
-    while(n!='e' && dflag!=1 )
+    while(n!='e' && dflag!=1 )                                  //press e to quit in between
     {
         system("cls");
-        bonds();
+        show_bounds();
         gotoxy(a,b);
         cout<<"%";
-        GUI();
+        show_snake();
         start_time=GetTickCount();
         check_time=start_time+700;
         temp=q.front();
         //cout<<"\n Front (x,y) = "<<temp.x<<" "<<temp.y<<endl;
-        while(check_time>GetTickCount())
+        while(check_time>GetTickCount())                        //input within time period
         {
             if (kbhit())
             {
@@ -178,7 +179,7 @@ void steps()
             }
         }
         //cout<<"pressed "<<n<<endl;
-        switch (n)
+        switch (n)                                      //movement according key pressed
         {
         case 'w':
             p.x=temp.x;
@@ -235,7 +236,7 @@ int main()
 {
     p.x=0;                              //initial position
     p.y=0;
-    cout<<"Welcome to snake game..\nRules :-\nUse w,a,s,d to move snake..\n= represent head of snake\n+ represent rest part of snake\n% represent food of snake\nPress any key to continue..";
+    cout<<"Welcome to snake game..\nRules :-\nUse w,a,s,d to move snake..\n= represent head of snake\n+ represent rest part of snake\n% represent food of snake\nPress enter to continue..";
     while(!kbhit()){}
     q.push_front(p);
     steps();
